@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise Comitê de Ética RN Júnior 2023-2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .timeline-section {
+            padding: 50px 40px;
+            background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+        }
+        
+        .timeline-title {
+            text-align: center;
+            font-size: 2em;
+            color: #1e3c72;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+        
+        .timeline {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            position: relative;
+            margin-bottom: 60px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 80px;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: linear-gradient(to right, #4CAF50, #FFC107, #f44336);
+        }
+        
+        .year-card {
+            flex: 1;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .year-badge {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .year-2023 .year-badge {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+        }
+        
+        .year-2024 .year-badge {
+            background: linear-gradient(135deg, #FFC107, #ff9800);
+        }
+        
+        .year-2025 .year-badge {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+        }
+        
+        .score {
+            font-size: 2.5em;
+            line-height: 1;
+        }
+        
+        .score-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .year-title {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #1e3c72;
+            font-weight: bold;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        
+        .status-success {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .status-warning {
+            background: #FFC107;
+            color: #333;
+        }
+        
+        .status-danger {
+            background: #f44336;
+            color: white;
+        }
+        
+        .icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .dimensions-section {
+            padding: 50px 40px;
+            background: #f8f9fa;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2em;
+            color: #1e3c72;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+        
+        .dimension-grid {
+            display: grid;
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .dimension-row {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .dimension-name {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+        
+        .bars-container {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .year-bar {
+            flex: 1;
+        }
+        
+        .year-bar-label {
+            font-size: 0.85em;
+            color: #666;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .bar-wrapper {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .bar-fill {
+            height: 100%;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.85em;
+            transition: width 1s ease;
+        }
+        
+        .bar-2023 {
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+        }
+        
+        .bar-2024 {
+            background: linear-gradient(90deg, #FFC107, #ff9800);
+        }
+        
+        .bar-2025 {
+            background: linear-gradient(90deg, #f44336, #d32f2f);
+        }
+        
+        .patterns-section {
+            padding: 50px 40px;
+            background: white;
+        }
+        
+        .patterns-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .pattern-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+        
+        .pattern-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .pattern-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .pattern-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .pattern-items {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .pattern-items li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.95em;
+        }
+        
+        .pattern-items li:last-child {
+            border-bottom: none;
+        }
+        
+        .alert-section {
+            padding: 50px 40px;
+            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+            color: white;
+        }
+        
+        .alert-box {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .alert-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .alert-title {
+            font-size: 2.2em;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        
+        .alert-list {
+            text-align: left;
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .alert-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .alert-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.1em;
+        }
+        
+        .alert-list li::before {
+            content: '⚠️';
+            position: absolute;
+            left: 0;
+        }
+        
+        .learnings-section {
+            padding: 50px 40px;
+            background: #f8f9fa;
+        }
+        
+        .learnings-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .learning-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .learning-box.success {
+            border-left: 5px solid #4CAF50;
+        }
+        
+        .learning-box.danger {
+            border-left: 5px solid #f44336;
+        }
+        
+        .learning-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .learning-title.success {
+            color: #4CAF50;
+        }
+        
+        .learning-title.danger {
+            color: #f44336;
+        }
+        
+        .learning-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .learning-list li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+        
+        .learning-list.success li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .learning-list.danger li::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: #f44336;
+            font-weight: bold;
+        }
+        
+        .conclusion-section {
+            padding: 60px 40px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .conclusion-box {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .conclusion-title {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        
+        .conclusion-text {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+        
+        .risk-items {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 40px;
+        }
+        
+        .risk-items ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .risk-items li {
+            padding: 10px 0;
+            font-size: 1.1em;
+        }
+        
+        .cta-box {
+            background: #f44336;
+            padding: 30px;
+            border-radius: 15px;
+            font-size: 1.4em;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .footer {
+            padding: 30px;
+            text-align: center;
+            background: #1a1a1a;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .timeline::before {
+                left: 50%;
+                top: 0;
+                bottom: 0;
+                width: 4px;
+                height: auto;
+            }
+            
+            .learnings-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .patterns-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📊 TRAJETÓRIA DO COMITÊ DE ÉTICA</h1>
+            <p>RN Júnior | Análise 2023-2025</p>
+        </div>
+
+        <!-- Timeline Section -->
+        <div class="timeline-section">
+            <h2 class="timeline-title">Linha do Tempo - Desempenho</h2>
+            <div class="timeline">
+                <div class="year-card year-2023">
+                    <div class="year-badge">
+                        <div class="score">8</div>
+                        <div class="score-label">/10</div>
+                    </div>
+                    <div class="icon">📈</div>
+                    <div class="year-title">2023</div>
+                    <div class="status-badge status-success">EXPERIMENTAÇÃO</div>
+                    <p style="margin-top: 15px; color: #666;">Criatividade e engajamento alto com a rede</p>
+                </div>
+                
+                <div class="year-card year-2024">
+                    <div class="year-badge">
+                        <div class="score">5</div>
+                        <div class="score-label">/10</div>
+                    </div>
+                    <div class="icon">📉</div>
+                    <div class="year-title">2024</div>
+                    <div class="status-badge status-warning">ESTRUTURAÇÃO FRUSTRADA</div>
+                    <p style="margin-top: 15px; color: #666;">Início promissor, colapso na metade</p>
+                </div>
+                
+                <div class="year-card year-2025">
+                    <div class="year-badge">
+                        <div class="score">2</div>
+                        <div class="score-label">/10</div>
+                    </div>
+                    <div class="icon">🚨</div>
+                    <div class="year-title">2025</div>
+                    <div class="status-badge status-danger">NEGLIGÊNCIA CRÍTICA</div>
+                    <p style="margin-top: 15px; color: #666;">Ausência de ações e educação da rede</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dimensions Section -->
+        <div class="dimensions-section">
+            <h2 class="section-title">🔍 Análise por Dimensões</h2>
+            <div class="dimension-grid">
+                <div class="dimension-row">
+                    <div class="dimension-name">⚡ ATIVIDADE</div>
+                    <div class="bars-container">
+                        <div class="year-bar">
+                            <div class="year-bar-label">2023</div>
+                            <div class="bar-wrapper">
+                                <div class="bar-fill bar-2023" style="width: 80%;">80%</div>
+                            </div>
+                        </div>
+                        <div class="year-bar">
+                            <div class="year-bar-label">2024</div>
+                            <div class="bar-wrapper">
+                                <div class="bar-fill bar-2024" style="width: 50%;">50%</div>
+                            </div>
+                        </div>
+                        <div class="year-bar">
+                            <div class="year-bar-label">2025</div>
+                            <div class="bar-wrapper">
+                                <div class="bar-fill bar-2025" style="width: 20%;">20%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dimension-row">
+                    <div class="dimension-name">🏗️ ESTRUTURAÇÃO</div>
+                    <div class="bars-container">
+                        <div class="year-bar">
+                            <div class="year-bar-label">2023</div>
+                            <div class="bar-wrapper">
+                                <div class="bar-fill bar-2023" style="width: 40%;">40%</div>
+                            </div>
+                        </div>
+                        <div class="year-bar">
+                            <div class="year-bar-label">2024</div>
+                            <div class="bar-wrapper">
+                                <div class="bar-fill bar-2024" style="width: 80%;">80%</div>
+                            </div>
+                        </div>
+                        <div class="year-bar">
+                            <div class="year-bar-label">2025</div>
+                            <div class="bar-wrapper">
+                                <div class="bar-fill bar-2025" style="width: 30%;">30%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dimension-row">
+                    <div class="dimension-name">🎯 AUTONOMIA</div>
+                    <div class="bars-container">
+                        <div class="year-bar">
+                            <div class="year-bar-label">2023</div>
+                            <div class="bar-wrapper">
+                                <div class="bar-fill bar-2023" style="width: 50%;">50%</div>
+                            </div>
+                        </div>
+                        <div class="year-bar">
+                            <div class="year-bar-label">2024</div>
+                            <div class="bar-wrapper">
+                                <div class="bar-fill bar-2024" style="width: 20%;">20%</div>
+                            </div>
+                        </div>
+                        <div class="year-bar">
+                            <div class="year-bar-label">2025</div>
+                            <div class="bar-wrapper">
+                                <div class="bar-fill bar-2025" style="width: 10%;">10%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dimension-row">
+                    <div class="dimension-name">⭐ CREDIBILIDADE</div>
+                    <div class="bars-container">
+                        <div class="year-bar">
+                            <div class="year-bar-label">2023</div>
+                            <div class="bar-wrapper">
+                                <div class="bar-fill bar-2023" style="width: 60%;">60%</div>
+                            </div>
+                        </div>
+                        <div class="year-bar">
+                            <div class="year-bar-label">2024</div>
+                            <div class="bar-wrapper">
+                                <div class="bar-fill bar-2024" style="width: 40%;">40%</div>
+                            </div>
+                        </div>
+                        <div class="year-bar">
+                            <div class="year-bar-label">2025</div>
+                            <div class="bar-wrapper">
+                                <div class="bar-fill bar-2025" style="width: 10%;">10%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dimension-row">
+                    <div class="dimension-name">📚 EDUCAÇÃO DA REDE</div>
+                    <div class="bars-container">
+                        <div class="year-bar">
+                            <div class="year-bar-label">2023</div>
+                            <div class="bar-wrapper">
+                                <div class="bar-fill bar-2023" style="width: 80%;">80%</div>
+                            </div>
+                        </div>
+                        <div class="year-bar">
+                            <div class="year-bar-label">2024</div>
+                            <div class="bar-wrapper">
+                                <div class="bar-fill bar-2024" style="width: 50%;">50%</div>
+                            </div>
+                        </div>
+                        <div class="year-bar">
+                            <div class="year-bar-label">2025</div>
+                            <div class="bar-wrapper">
+                                <div class="bar-fill bar-2025" style="width: 10%;">10%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Patterns Section -->
+        <div class="patterns-section">
+            <h2 class="section-title">⚠️ Padrões Críticos Identificados</h2>
+            <div class="patterns-grid">
+                <div class="pattern-card">
+                    <div class="pattern-icon">🎯</div>
+                    <div class="pattern-title">Centralização Excessiva</div>
+                    <ul class="pattern-items">
+                        <li>Liderança criativa, mas centralizadora</li>
+                        <li>Colapso total após saída da líder</li>
+                        <li>Ausência de liderança = Inatividade</li>
+                    </ul>
+                </div>
+                
+                <div class="pattern-card">
+                    <div class="pattern-icon">🔗</div>
+                    <div class="pattern-title">Falta de Autonomia</div>
+                    <ul class="pattern-items">
+                        <li>Coordenadorias não atuam sozinhas</li>
+                        <li>Dependência de uma pessoa</li>
+                        <li>Processos não autossustentáveis</li>
+                    </ul>
+                </div>
+                
+                <div class="pattern-card">
+                    <div class="pattern-icon">📉</div>
+                    <div class="pattern-title">Descontinuidade</div>
+                    <ul class="pattern-items">
+                        <li>Cada ano "reinventa a roda"</li>
+                        <li>Conhecimento não consolidado</li>
+                        <li>Sucessão sem planejamento</li>
+                    </ul>
+                </div>
+                
+                <div class="pattern-card">
+                    <div class="pattern-icon">⚖️</div>
+                    <div class="pattern-title">Priorização Oscilante</div>
+                    <ul class="pattern-items">
+                        <li>Perde espaço sem champion</li>
+                        <li>Outras áreas não valorizam</li>
+                        <li>Ética não é estratégica</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert Section -->
+        <div class="alert-section">
+            <div class="alert-box">
+                <div class="alert-icon">🚨</div>
+                <h2 class="alert-title">ZONA DE ALERTA VERMELHO</h2>
+                <div class="alert-list">
+                    <ul>
+                        <li>Risco de colapso total da governança ética</li>
+                        <li>Normalização de comportamentos antiéticos</li>
+                        <li>Infrações não detectadas/não tratadas</li>
+                        <li>Perda de credibilidade perante a Brasil Júnior</li>
+                        <li>Possível responsabilização da Presidência do Conselho</li>
+                        <li>Deterioração irreversível da cultura ética</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learnings Section -->
+        <div class="learnings-section">
+            <h2 class="section-title">💡 Principais Aprendizados</h2>
+            <div class="learnings-grid">
+                <div class="learning-box success">
+                    <div class="learning-title success">✅ FUNCIONOU</div>
+                    <ul class="learning-list success">
+                        <li>Pautas predefinidas e replicáveis</li>
+                        <li>Estrutura em coordenadorias</li>
+                        <li>Presença ativa em eventos</li>
+                        <li>Criatividade na comunicação</li>
+                        <li>Identificação proativa de problemas</li>
+                    </ul>
+                </div>
+                
+                <div class="learning-box danger">
+                    <div class="learning-title danger">❌ NÃO FUNCIONOU</div>
+                    <ul class="learning-list danger">
+                        <li>Centralização em 1 pessoa</li>
+                        <li>Abordagens muito lúdicas</li>
+                        <li>Falta de processos escritos</li>
+                        <li>Ausência de plano sucessório</li>
+                        <li>Descontinuidade nas ações</li>
+                        <li>Comitê sem priorização</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conclusion Section -->
+        <div class="conclusion-section">
+            <div class="conclusion-box">
+                <h2 class="conclusion-title">🎯 CONCLUSÃO</h2>
+                <p class="conclusion-text">
+                    A trajetória 2023 → 2024 → 2025 demonstra uma <strong>CURVA DESCENDENTE ACENTUADA</strong> que coloca em risco:
+                </p>
+                <div class="risk-items">
+                    <ul>
+                        <li>🔻 Governança ética da RN Júnior</li>
+                        <li>🔻 Credibilidade perante o MEJ</li>
+                        <li>🔻 Cultura organizacional saudável</li>
+                        <li>🔻 Cumprimento do Código de Ética da BJ</li>
+                        <li>🔻 Responsabilidade da Presidência do Conselho</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p style="margin-top: 10px; opacity: 0.7;">RN Júnior | Análise Estratégica - Tállyson Izidio - Candidato ao Time RN 2026</p>
+        </div>
+    </div>
+</body>
+</html>
